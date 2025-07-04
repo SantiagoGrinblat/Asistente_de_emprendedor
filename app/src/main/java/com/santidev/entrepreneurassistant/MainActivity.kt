@@ -5,7 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import com.santidev.entrepreneurassistant.ui.theme.EntrepreneurAssistantTheme
-import com.santidev.entrepreneurassistant.utils.Calculators
+import com.santidev.entrepreneurassistant.ui.screens.Calculators
 
 class MainActivity : ComponentActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {

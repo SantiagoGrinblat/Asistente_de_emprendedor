@@ -1,4 +1,4 @@
-package com.santidev.entrepreneurassistant.ui.screens
+package com.santidev.entrepreneurassistant.utils
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -24,69 +24,64 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavHostController
 
 @Composable
-fun BalanceScreen() {
-  var costFixed by remember { mutableStateOf("") }
-  var costVariable by remember { mutableStateOf("") }
-  var priceUnit by remember { mutableStateOf("") }
-  var balancePoint by remember { mutableStateOf(0.0) }
-  var salesNeeded by remember { mutableStateOf(0.0) }
+fun MarginCalculator() {
+  var cost by remember { mutableStateOf("") }
+  var marginDesired by remember { mutableStateOf("") }
+  var priceSale by remember { mutableStateOf(0.0) }
+  var revenue by remember { mutableStateOf(0.0) }
   
-  fun calculateBalance() {
-    val fixed = costFixed.toDoubleOrNull() ?: 0.0
-    val variables = costVariable.toDoubleOrNull() ?: 0.0
-    val price = priceUnit.toDoubleOrNull() ?: 0.0
+  fun calculate() {
+    val costNum = cost.toDoubleOrNull() ?: 0.0
+    val marginNum = marginDesired.toDoubleOrNull() ?: 0.0
     
-    if (fixed > 0 && price > variables) {
-      balancePoint = fixed / (price - variables)
-      salesNeeded = balancePoint * price
+    if (costNum > 0 && marginNum > 0) {
+      priceSale = costNum / (1 - marginNum / 100)
+      revenue = priceSale - costNum
     }
   }
   
-  Column(
-    modifier = Modifier
-      .fillMaxWidth()
-      .verticalScroll(rememberScrollState())
+  Column(modifier = Modifier
+    .fillMaxWidth()
+    .verticalScroll(rememberScrollState())
   ) {
     Card(modifier = Modifier.fillMaxWidth()) {
       Column(modifier = Modifier.padding(16.dp)) {
         Text(
-          text = "Calculadora de Punto de Equilibrio",
+          text = "Calculadora de Precio con Margen de ganancias",
           fontSize = 18.sp,
           fontWeight = FontWeight.SemiBold,
           modifier = Modifier.padding(bottom = 16.dp)
         )
         OutlinedTextField(
-          value = costFixed,
-          onValueChange = { costFixed = it },
-          label = { Text("Costos fijos mensuales ($)") },
+          value = cost,
+          onValueChange = { cost = it },
+          label = { Text("Costo del producto ($)") },
           keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
           modifier = Modifier.fillMaxWidth()
         )
+        
         Spacer(modifier = Modifier.height(8.dp))
+        
         OutlinedTextField(
-          value = costVariable,
-          onValueChange = { costVariable = it },
-          label = { Text("Costo variable por unidad ($)") },
+          value = marginDesired,
+          onValueChange = { marginDesired = it },
+          label = { Text("Margen deseado (%)") },
           keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+          modifier = Modifier.fillMaxWidth()
         )
-        Spacer(modifier = Modifier.height(8.dp))
-        OutlinedTextField(
-          value = priceUnit,
-          onValueChange = { priceUnit = it },
-          label = { Text("Precio de venta por unidad ($)") },
-          keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-        )
+        
         Spacer(modifier = Modifier.height(16.dp))
+        
         Button(
-          onClick = { calculateBalance() },
+          onClick = { calculate() },
           modifier = Modifier.fillMaxWidth()
         ) {
           Text("Calcular")
         }
-        if (balancePoint > 0) {
+        
+        if (priceSale > 0) {
           Spacer(modifier = Modifier.height(16.dp))
           Card(colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer)) {
             Column(modifier = Modifier.padding(16.dp)) {
@@ -95,9 +90,9 @@ fun BalanceScreen() {
                 fontWeight = FontWeight.SemiBold,
                 modifier = Modifier.padding(bottom = 8.dp)
               )
-              Text(text = "Unidades a vender: ${String.format("%.0f", balancePoint)} por mes")
-              Text(text = "Ventas necesarias: ${String.format("%.0f", salesNeeded)} por mes")
-              Text(text = "Unidades por día: ${String.format("%.1f", balancePoint / 30)}")
+              Text("Precio de venta: ${formatearPeso(priceSale)}")
+              Text("Ganancia: ${formatearPeso(revenue)}")
+              Text("Ganancia %: ${String.format("%.1f", (revenue / priceSale * 100))}%")
             }
           }
         }

@@ -1,4 +1,4 @@
-package com.santidev.entrepreneurassistant.ui.screens
+package com.santidev.entrepreneurassistant.utils
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -24,11 +24,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.santidev.entrepreneurassistant.utils.formatearPeso
 import kotlin.math.pow
 
 @Composable
-fun InflationScreen() {
+fun InflationCalculator() {
   var precioOriginal by remember { mutableStateOf("") }
   var inflacionMensual by remember { mutableStateOf("") }
   var meses by remember { mutableStateOf("") }
