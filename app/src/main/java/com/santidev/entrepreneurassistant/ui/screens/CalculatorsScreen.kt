@@ -10,29 +10,30 @@ import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRow
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
-import com.santidev.entrepreneurassistant.utils.BalanceCalculator
+import androidx.navigation.NavHostController
 import com.santidev.entrepreneurassistant.utils.InflationCalculator
 import com.santidev.entrepreneurassistant.utils.MarginCalculator
 import com.santidev.entrepreneurassistant.utils.TaxesCalculator
 
 @Composable
-fun Calculators() {
+fun CalculatorsScreen(navController: NavHostController) {
   var tabSelecction by remember { mutableStateOf(0) }
   
-  val tabs = listOf("Margin", "Balance", "Inflation", "Taxes")
+  val tabs = listOf("Margenes", "Inflacion", "Impuestos")
   
-  Column(modifier = Modifier
-    .fillMaxSize()
-    .padding(16.dp)
+  Column(
+    modifier = Modifier
+      .fillMaxSize()
+      .padding(16.dp)
   ) {
     Text(
       text = "Calculadoras para Emprendedores",
@@ -55,11 +56,10 @@ fun Calculators() {
     }
     Spacer(modifier = Modifier.height(16.dp))
     
-    when(tabSelecction) {
+    when (tabSelecction) {
       0 -> MarginCalculator()
-      1 -> BalanceCalculator()
-      2 -> InflationCalculator()
-      3 -> TaxesCalculator()
+      1 -> InflationCalculator()
+      2 -> TaxesCalculator()
     }
   }
 }
