@@ -6,6 +6,8 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import com.santidev.entrepreneurassistant.navigation.NavigationComponent
 import com.santidev.entrepreneurassistant.ui.theme.EntrepreneurAssistantTheme
@@ -17,8 +19,10 @@ class MainActivity : ComponentActivity() {
     enableEdgeToEdge()
     setContent {
       EntrepreneurAssistantTheme {
-        Box(modifier = Modifier.fillMaxSize()) {
-          NavigationComponent()
+        Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
+          Box(modifier = Modifier.fillMaxSize()) {
+            NavigationComponent()
+          }
         }
       }
     }

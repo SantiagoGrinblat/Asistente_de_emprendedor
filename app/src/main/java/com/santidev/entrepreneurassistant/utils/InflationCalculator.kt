@@ -1,5 +1,6 @@
 package com.santidev.entrepreneurassistant.utils
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -20,6 +21,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
@@ -28,20 +30,20 @@ import kotlin.math.pow
 
 @Composable
 fun InflationCalculator() {
-  var precioOriginal by remember { mutableStateOf("") }
-  var inflacionMensual by remember { mutableStateOf("") }
-  var meses by remember { mutableStateOf("") }
-  var precioAjustado by remember { mutableStateOf(0.0) }
-  var aumento by remember { mutableStateOf(0.0) }
+  var originalPrice by remember { mutableStateOf("") }
+  var monthlyInflation by remember { mutableStateOf("") }
+  var months by remember { mutableStateOf("") }
+  var adjustedPrice by remember { mutableStateOf(0.0) }
+  var increase by remember { mutableStateOf(0.0) }
   
   fun calcular() {
-    val original = precioOriginal.toDoubleOrNull() ?: 0.0
-    val inflacion = inflacionMensual.toDoubleOrNull() ?: 0.0
-    val mesesNum = meses.toDoubleOrNull() ?: 0.0
+    val original = originalPrice.toDoubleOrNull() ?: 0.0
+    val inflation = monthlyInflation.toDoubleOrNull() ?: 0.0
+    val monthsNum = months.toDoubleOrNull() ?: 0.0
     
-    if (original > 0 && inflacion > 0 && mesesNum > 0) {
-      precioAjustado = original * (1 + inflacion / 100).pow(mesesNum)
-      aumento = precioAjustado - original
+    if (original > 0 && inflation > 0 && monthsNum > 0) {
+      adjustedPrice = original * (1 + inflation / 100).pow(monthsNum)
+      increase = adjustedPrice - original
     }
   }
   
@@ -57,15 +59,15 @@ fun InflationCalculator() {
         modifier = Modifier.padding(16.dp)
       ) {
         Text(
-          text = "Calculadora de Ajuste por Inflación",
+          text = "Ajuste por Inflación",
           fontSize = 18.sp,
-          fontWeight = FontWeight.SemiBold,
+          fontWeight = FontWeight.Bold,
           modifier = Modifier.padding(bottom = 16.dp)
         )
         
         OutlinedTextField(
-          value = precioOriginal,
-          onValueChange = { precioOriginal = it },
+          value = originalPrice,
+          onValueChange = { originalPrice = it },
           label = { Text("Precio original ($)") },
           keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
           modifier = Modifier.fillMaxWidth()
@@ -74,8 +76,8 @@ fun InflationCalculator() {
         Spacer(modifier = Modifier.height(8.dp))
         
         OutlinedTextField(
-          value = inflacionMensual,
-          onValueChange = { inflacionMensual = it },
+          value = monthlyInflation,
+          onValueChange = { monthlyInflation = it },
           label = { Text("Inflación mensual (%)") },
           keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
           modifier = Modifier.fillMaxWidth()
@@ -84,9 +86,9 @@ fun InflationCalculator() {
         Spacer(modifier = Modifier.height(8.dp))
         
         OutlinedTextField(
-          value = meses,
-          onValueChange = { meses = it },
-          label = { Text("Cantidad de meses") },
+          value = months,
+          onValueChange = { months = it },
+          label = { Text("Cantidad de meses con esa inflación") },
           keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
           modifier = Modifier.fillMaxWidth()
         )
@@ -95,33 +97,28 @@ fun InflationCalculator() {
         
         Button(
           onClick = { calcular() },
-          modifier = Modifier.fillMaxWidth()
+          modifier = Modifier.fillMaxWidth().background(MaterialTheme.colorScheme.secondary),
         ) {
-          Text("Calcular")
+          Text("Calcular", color = Color.White)
         }
         
-        if (precioAjustado > 0) {
+        if (adjustedPrice > 0) {
           Spacer(modifier = Modifier.height(16.dp))
           Card(
-            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer)
+            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer),
+            modifier = Modifier.fillMaxWidth()
           ) {
             Column(
               modifier = Modifier.padding(16.dp)
             ) {
               Text(
                 text = "Resultados:",
-                fontWeight = FontWeight.SemiBold,
+                fontWeight = FontWeight.Bold,
                 modifier = Modifier.padding(bottom = 8.dp)
               )
-              Text("Precio ajustado: ${formatearPeso(precioAjustado)}")
-              Text("Aumento total: ${formatearPeso(aumento)}")
-              Text(
-                "Aumento %: ${
-                  String.format(
-                    "%.1f",
-                    (aumento / precioOriginal.toDouble() * 100)
-                  )
-                }%"
+              Text("Precio ajustado: ${formatearPeso(adjustedPrice)}", fontWeight = FontWeight.Bold)
+              Text("Aumento total: ${formatearPeso(increase)}", fontWeight = FontWeight.Bold)
+              Text("Aumento %: ${String.format("%.1f", (increase / originalPrice.toDouble() * 100) )}%", fontWeight = FontWeight.Bold
               )
             }
           }

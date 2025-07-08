@@ -1,168 +1,43 @@
 package com.santidev.entrepreneurassistant.utils
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AdUnits
+import androidx.compose.material.icons.filled.AllInbox
+import androidx.compose.material.icons.filled.Calculate
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.filled.ShoppingCart
+import androidx.compose.material.icons.outlined.AdUnits
+import androidx.compose.material.icons.outlined.AllInbox
+import androidx.compose.material.icons.outlined.Calculate
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material.icons.outlined.ShoppingCart
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
-import androidx.compose.material3.Scaffold
+import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.input.key.Key.Companion.Home
-import androidx.navigation.NavDestination
+import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
+import com.santidev.entrepreneurassistant.R
 import com.santidev.entrepreneurassistant.navigation.CalculatorScreen
 import com.santidev.entrepreneurassistant.navigation.HomeScreen
 import com.santidev.entrepreneurassistant.navigation.SettingsScreen
-import com.santidev.entrepreneurassistant.ui.screens.CalculatorsScreen
-
-//data class BottomNavigationItem(
-//  val title: String,
-//  val destination: Any,
-//  val selectedIcon: ImageVector,
-//  val unselectedIcon: ImageVector,
-//)
-//
-//@Composable
-//fun BottomNavigation(navController: NavHostController) {
-//  val items = listOf(
-//    BottomNavigationItem(
-//      title = "Home",
-//      destination = HomeScreen,
-//      selectedIcon = Icons.Filled.Home,
-//      unselectedIcon = Icons.Outlined.Home
-//    ),
-//    BottomNavigationItem(
-//      title = "Calculator",
-//      destination = CalculatorScreen,
-//      selectedIcon = Icons.Filled.ShoppingCart,
-//      unselectedIcon = Icons.Outlined.ShoppingCart
-//    ),
-//    BottomNavigationItem(
-//      title = "Settings",
-//      destination = SettingsScreen,
-//      selectedIcon = Icons.Filled.Settings,
-//      unselectedIcon = Icons.Outlined.Settings
-//    ),
-//  )
-//
-//  var selectedItemIndex by rememberSaveable {
-//    mutableStateOf(0)
-//  }
-//
-//  Scaffold(
-//    bottomBar = {
-//      NavigationBar {
-//        items.forEachIndexed { index, item ->
-//          NavigationBarItem(
-//            selected = selectedItemIndex == index,
-//            onClick = {
-//              selectedItemIndex = index
-//              navController.navigate(item.destination) {
-//                popUpTo(navController.graph.startDestinationId) {
-//                  saveState = true
-//                }
-//                launchSingleTop = true
-//                restoreState = true
-//              }
-//            },
-//            label = {
-//              Text(text = item.title)
-//            },
-//            icon = {
-//              Icon(
-//                imageVector = if (index == selectedItemIndex) {
-//                  item.selectedIcon
-//                } else item.unselectedIcon ,
-//                contentDescription = item.title
-//              )
-//            }
-//          )
-//        }
-//      }
-//    }
-//  ) {}
-//}
-
-//data class BottomNavigationItem(
-//  val title: String,
-//  val destination: Any,
-//  val selectedIcon: ImageVector,
-//  val unselectedIcon: ImageVector,
-//)
-//
-//@Composable
-//fun BottomNavigation(navController: NavHostController) {
-//  val items = listOf(
-//    BottomNavigationItem(
-//      title = "Home",
-//      destination = HomeScreen,
-//      selectedIcon = Icons.Filled.Home,
-//      unselectedIcon = Icons.Outlined.Home
-//    ),
-//    BottomNavigationItem(
-//      title = "Calculator",
-//      destination = CalculatorScreen,
-//      selectedIcon = Icons.Filled.ShoppingCart,
-//      unselectedIcon = Icons.Outlined.ShoppingCart
-//    ),
-//    BottomNavigationItem(
-//      title = "Settings",
-//      destination = SettingsScreen,
-//      selectedIcon = Icons.Filled.Settings,
-//      unselectedIcon = Icons.Outlined.Settings
-//    ),
-//  )
-//
-//  // Obtenemos la ruta actual para determinar cual item esta seleccionado
-//  val currentDestination = navController.currentBackStackEntryAsState().value?.destination
-//
-//  NavigationBar {
-//    items.forEach { item ->
-//      // Verificamos si el item actual está seleccionando el correcto basandose en la ruta de la layoutr
-//      val isSelected = currentDestination?.route == item.destination::class.qualifiedName
-//
-//      NavigationBarItem(
-//        selected = isSelected,
-//        onClick = {
-//          navController.navigate(item.destination) {
-//            // Evitamos múltiples copias de la misma pantalla en el stack
-//            popUpTo(navController.graph.startDestinationId) {
-//              saveState = true
-//            }
-//            launchSingleTop = true
-//            restoreState = true
-//          }
-//        },
-//        label = {
-//          Text(text = item.title)
-//        },
-//        icon = {
-//          Icon(
-//            imageVector = if (isSelected) {
-//              item.selectedIcon
-//            } else {
-//              item.unselectedIcon
-//            },
-//            contentDescription = item.title
-//          )
-//        }
-//      )
-//    }
-//  }
-//}
 
 data class BottomNavigationItem(
   val title: String,
@@ -173,23 +48,23 @@ data class BottomNavigationItem(
 
 @Composable
 fun BottomNavigation(navController: NavHostController) {
-  // Memorizar la lista de items para evitar recreación
+  // Recordar la lista de items para evitar recreación de la misma en cada layout
   val items = remember {
     listOf(
       BottomNavigationItem(
-        title = "Home",
+        title = "Inicio",
         destination = HomeScreen,
-        selectedIcon = Icons.Filled.Home,
-        unselectedIcon = Icons.Outlined.Home
+        selectedIcon = Icons.Filled.AdUnits,
+        unselectedIcon = Icons.Outlined.AdUnits
       ),
       BottomNavigationItem(
-        title = "Calculator",
+        title = "Calculadora",
         destination = CalculatorScreen,
-        selectedIcon = Icons.Filled.ShoppingCart,
-        unselectedIcon = Icons.Outlined.ShoppingCart
+        selectedIcon = Icons.Filled.Calculate,
+        unselectedIcon = Icons.Outlined.Calculate
       ),
       BottomNavigationItem(
-        title = "Settings",
+        title = "Ajustes",
         destination = SettingsScreen,
         selectedIcon = Icons.Filled.Settings,
         unselectedIcon = Icons.Outlined.Settings
@@ -197,18 +72,24 @@ fun BottomNavigation(navController: NavHostController) {
     )
   }
   
-  // Obtener la ruta actual de forma eficiente
+  // Obtener la ruta de navegacion actual de forma mas facil
   val navBackStackEntry by navController.currentBackStackEntryAsState()
   val currentDestination = navBackStackEntry?.destination
   
-  NavigationBar {
+  NavigationBar(
+    modifier = Modifier
+      .fillMaxWidth(),
+    containerColor = MaterialTheme.colorScheme.surface,
+    contentColor = MaterialTheme.colorScheme.onSurface,
+    tonalElevation = 8.dp
+  ) {
     items.forEach { item ->
       val isSelected = currentDestination?.route == item.destination::class.qualifiedName
       
       NavigationBarItem(
         selected = isSelected,
         onClick = {
-          // Evitar navegación innecesaria si ya estamos en la pantalla
+          // Evitar navegación innecesaria si ya estamos en esa layout para evitar recarga
           if (!isSelected) {
             navController.navigate(item.destination) {
               popUpTo(navController.graph.startDestinationId) {
@@ -220,18 +101,34 @@ fun BottomNavigation(navController: NavHostController) {
           }
         },
         label = {
-          Text(text = item.title)
+          Text(
+            text = item.title,
+            fontWeight = FontWeight.Bold,
+            color = if (isSelected) {
+              MaterialTheme.colorScheme.primary
+            } else {
+              MaterialTheme.colorScheme.onSurface
+            }
+          )
         },
         icon = {
           Icon(
-            imageVector = if (isSelected) {
-              item.selectedIcon
+            imageVector = if (isSelected) item.selectedIcon else item.unselectedIcon,
+            contentDescription = item.title,
+            tint = if (isSelected) {
+              MaterialTheme.colorScheme.primary
             } else {
-              item.unselectedIcon
-            },
-            contentDescription = item.title
+              MaterialTheme.colorScheme.onSurfaceVariant
+            }
           )
-        }
+        },
+        colors = NavigationBarItemDefaults.colors(
+          selectedIconColor = MaterialTheme.colorScheme.primary,
+          selectedTextColor = MaterialTheme.colorScheme.primary,
+          unselectedIconColor = MaterialTheme.colorScheme.onSurface,
+          unselectedTextColor = MaterialTheme.colorScheme.onSurface,
+          indicatorColor = MaterialTheme.colorScheme.primaryContainer
+        )
       )
     }
   }
