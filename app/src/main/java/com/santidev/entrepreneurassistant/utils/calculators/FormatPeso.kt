@@ -1,4 +1,4 @@
-package com.santidev.entrepreneurassistant.utils
+package com.santidev.entrepreneurassistant.utils.calculators
 
 import androidx.compose.runtime.Composable
 import java.text.NumberFormat
