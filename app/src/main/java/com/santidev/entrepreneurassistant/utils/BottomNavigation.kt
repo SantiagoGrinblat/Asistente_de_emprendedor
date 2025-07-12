@@ -6,14 +6,18 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AdUnits
 import androidx.compose.material.icons.filled.AllInbox
+import androidx.compose.material.icons.filled.BorderOuter
 import androidx.compose.material.icons.filled.Calculate
 import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Layers
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material.icons.outlined.AdUnits
 import androidx.compose.material.icons.outlined.AllInbox
+import androidx.compose.material.icons.outlined.BorderOuter
 import androidx.compose.material.icons.outlined.Calculate
 import androidx.compose.material.icons.outlined.Home
+import androidx.compose.material.icons.outlined.Layers
 import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material.icons.outlined.ShoppingCart
 import androidx.compose.material3.Icon
@@ -54,8 +58,8 @@ fun BottomNavigation(navController: NavHostController) {
       BottomNavigationItem(
         title = "Inicio",
         destination = HomeScreen,
-        selectedIcon = Icons.Filled.AdUnits,
-        unselectedIcon = Icons.Outlined.AdUnits
+        selectedIcon = Icons.Filled.Layers,
+        unselectedIcon = Icons.Outlined.Layers
       ),
       BottomNavigationItem(
         title = "Calculadora",
@@ -127,7 +131,7 @@ fun BottomNavigation(navController: NavHostController) {
           selectedTextColor = MaterialTheme.colorScheme.primary,
           unselectedIconColor = MaterialTheme.colorScheme.onSurface,
           unselectedTextColor = MaterialTheme.colorScheme.onSurface,
-          indicatorColor = MaterialTheme.colorScheme.primaryContainer
+          indicatorColor = MaterialTheme.colorScheme.surface
         )
       )
     }

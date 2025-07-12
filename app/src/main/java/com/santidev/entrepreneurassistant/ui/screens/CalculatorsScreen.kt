@@ -45,7 +45,6 @@ fun CalculatorsScreen(navController: NavHostController) {
         .fillMaxWidth()
         .padding(bottom = 16.dp),
       textAlign = TextAlign.Center,
-      color = Color.White
     )
     
     TabRow(selectedTabIndex = tabSelecction) {
