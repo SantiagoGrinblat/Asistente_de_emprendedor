@@ -1,8 +1,11 @@
+import org.gradle.kotlin.dsl.implementation
+
 plugins {
   alias(libs.plugins.android.application)
   alias(libs.plugins.kotlin.android)
   alias(libs.plugins.kotlin.compose)
   alias(libs.plugins.jetbrains.kotlin.serialization)
+  alias(libs.plugins.ksp)
 }
 
 android {
@@ -39,9 +42,28 @@ android {
 
 dependencies {
   
+  //Navegacion
   implementation(libs.androidx.navigation.compose)
+  
+  //serializacion
   implementation(libs.kotlinx.serialization.json)
+  
+  //iconos
   implementation(libs.androidx.material.icons.extended)
+  
+  //Room
+  implementation(libs.room.runtime)
+  implementation(libs.room.ktx)
+  ksp(libs.room.compiler)
+  
+  //Koin
+  implementation(project.dependencies.platform(libs.koin.bom))
+  implementation(libs.koin.android)
+  implementation(libs.koin.core)
+  implementation(libs.koin.androidx.compose)
+  
+  //AppCompact
+  implementation(libs.androidx.appcompat)
   
   implementation(libs.androidx.core.ktx)
   implementation(libs.androidx.lifecycle.runtime.ktx)
