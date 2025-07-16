@@ -15,7 +15,6 @@ import com.santidev.entrepreneurassistant.utils.BottomNavigation
 @Composable
 fun NavigationComponent() {
   val navController = rememberNavController()
-  
   Scaffold(
     bottomBar = {
       BottomNavigation(navController = navController)
@@ -25,11 +24,6 @@ fun NavigationComponent() {
       navController = navController,
       startDestination = HomeScreen,
       modifier = Modifier.padding(paddingValues),
-//      // Optimización: Configurar transiciones más suaves
-//      enterTransition = { EnterTransition.None },
-//      exitTransition = { ExitTransition.None },
-//      popEnterTransition = { EnterTransition.None },
-//      popExitTransition = { ExitTransition.None }
     ) {
       composable<HomeScreen> {
         HomeScreen(navController = navController)
