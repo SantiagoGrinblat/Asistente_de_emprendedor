@@ -49,6 +49,7 @@ fun CardItem(
         contentDescription = card.title,
         modifier = Modifier
           .fillMaxWidth()
+          .height(500.dp)
           .clip(RoundedCornerShape(8.dp)),
         contentScale = ContentScale.Crop
       )

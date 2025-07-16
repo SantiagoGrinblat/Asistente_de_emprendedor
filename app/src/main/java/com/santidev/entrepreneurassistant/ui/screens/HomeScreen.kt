@@ -51,7 +51,11 @@ fun HomeScreen(navController: NavHostController) {
       textAlign = TextAlign.Center,
     )
     
-    Box(modifier = Modifier.fillMaxSize()) {
+    Box(
+      modifier = Modifier
+        .fillMaxSize(),
+      contentAlignment = Alignment.BottomEnd
+    ) {
       CardList(
         viewModel = viewModel,
         onAddClick = { showAddCard = true }
@@ -80,7 +84,7 @@ fun HomeScreen(navController: NavHostController) {
           )
         }
       }
+      ButtonAddCard()
     }
   }
-  ButtonAddCard()
 }
