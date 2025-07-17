@@ -1,4 +1,4 @@
-package com.santidev.entrepreneurassistant.utils
+package com.santidev.entrepreneurassistant.utils.cards
 
 import android.net.Uri
 import androidx.compose.foundation.layout.Arrangement

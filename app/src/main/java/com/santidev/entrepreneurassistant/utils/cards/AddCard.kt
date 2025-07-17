@@ -1,4 +1,4 @@
-package com.santidev.entrepreneurassistant.utils
+package com.santidev.entrepreneurassistant.utils.cards
 
 import android.Manifest.permission
 import android.content.Intent
@@ -24,7 +24,6 @@ import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
@@ -37,7 +36,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.KeyboardType
@@ -64,6 +62,7 @@ fun AddCard(
   var showRationaleDialog by remember { mutableStateOf(false) }
   
   val context = LocalContext.current
+  //guarda el permiso para acceder a la imagen en el futuro, incluso despues de cerrar y abrir la app.
   val imagePickerLauncher = rememberLauncherForActivityResult(
     contract = ActivityResultContracts.GetContent()
   ) { uri: Uri? ->
@@ -82,20 +81,24 @@ fun AddCard(
     }
   }
   
+  //Solicita el permiso segun la version del dispositivo
   val permission = remember {
     when {
       Build.VERSION.SDK_INT > Build.VERSION_CODES.UPSIDE_DOWN_CAKE -> {
+        //Permiso para android 15 o mas
         listOf(
           permission.READ_MEDIA_IMAGES,
           permission.READ_MEDIA_VISUAL_USER_SELECTED
         )
       }
       
+      //Permiso para android 14
       Build.VERSION.SDK_INT > Build.VERSION_CODES.TIRAMISU -> {
         listOf(permission.READ_MEDIA_IMAGES)
       }
       
       else -> {
+        //Permiso para android 13 o menos
         listOf(permission.READ_EXTERNAL_STORAGE)
       }
     }
@@ -103,6 +106,7 @@ fun AddCard(
   
   val multiplePermissionState = rememberMultiplePermissionsState(permission)
   
+  //Gestiona multiples permisos segun la version del dispositivo
   val hasImageAccess = remember(multiplePermissionState.allPermissionsGranted) {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
       multiplePermissionState.permissions.any { it.status.isGranted }
@@ -111,6 +115,7 @@ fun AddCard(
     }
   }
   
+  //Gestiona el permiso de la app para acceder a la galeria y dar una explicacion de porque se necesita
   val handleImageSelection = {
     when {
       hasImageAccess -> {
@@ -119,7 +124,7 @@ fun AddCard(
       
       multiplePermissionState.shouldShowRationale -> {
         showRationaleDialog = true
-        //Explicacion del porque el permiso de la app
+        //Explicacion del porque se solicita el permiso de la app
       }
       
       else -> {

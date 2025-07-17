@@ -25,9 +25,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.santidev.entrepreneurassistant.CardViewModel
-import com.santidev.entrepreneurassistant.utils.AddCard
-import com.santidev.entrepreneurassistant.utils.ButtonAddCard
-import com.santidev.entrepreneurassistant.utils.CardList
+import com.santidev.entrepreneurassistant.utils.cards.AddCard
+import com.santidev.entrepreneurassistant.utils.cards.ButtonAddCard
+import com.santidev.entrepreneurassistant.utils.cards.CardList
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
@@ -66,8 +66,8 @@ fun HomeScreen(navController: NavHostController) {
         Box(
           modifier = Modifier
             .fillMaxSize()
-            .background(Color.Black.copy(alpha = 0.5f))
-            .clickable { showAddCard = false } // cerrar tocando afuera
+            .background(Color.Black.copy(alpha = 1f))
+            .clickable { showAddCard = false } // cerrar tocando afuera de la card
         )
         
         Card(
