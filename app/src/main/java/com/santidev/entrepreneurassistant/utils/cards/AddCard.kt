@@ -33,6 +33,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -53,7 +54,7 @@ import org.koin.androidx.compose.koinViewModel
 @Composable
 fun AddCard(
   viewModel: CardViewModel = koinViewModel(),
-  onNavigateBack: () -> Unit
+  onNavigateBack: () -> Unit,
 ) {
   var title by remember { mutableStateOf("") }
   var description by remember { mutableStateOf("") }
