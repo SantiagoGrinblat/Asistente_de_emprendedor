@@ -9,7 +9,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.santidev.entrepreneurassistant.ui.screens.CalculatorsScreen
 import com.santidev.entrepreneurassistant.ui.screens.HomeScreen
-import com.santidev.entrepreneurassistant.ui.screens.SettingsScreen
+//import com.santidev.entrepreneurassistant.ui.screens.SettingsScreen
 import com.santidev.entrepreneurassistant.utils.BottomNavigation
 
 @Composable
@@ -31,9 +31,9 @@ fun NavigationComponent() {
       composable<CalculatorScreen> {
         CalculatorsScreen(navController = navController)
       }
-      composable<SettingsScreen> {
-        SettingsScreen(navController = navController)
-      }
+//      composable<SettingsScreen> {
+//        SettingsScreen(navController = navController)
+//      }
     }
   }
 }

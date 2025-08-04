@@ -41,7 +41,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import com.santidev.entrepreneurassistant.R
 import com.santidev.entrepreneurassistant.navigation.CalculatorScreen
 import com.santidev.entrepreneurassistant.navigation.HomeScreen
-import com.santidev.entrepreneurassistant.navigation.SettingsScreen
+//import com.santidev.entrepreneurassistant.navigation.SettingsScreen
 
 data class BottomNavigationItem(
   val title: String,
@@ -67,12 +67,12 @@ fun BottomNavigation(navController: NavHostController) {
         selectedIcon = Icons.Filled.Calculate,
         unselectedIcon = Icons.Outlined.Calculate
       ),
-      BottomNavigationItem(
-        title = "Ajustes",
-        destination = SettingsScreen,
-        selectedIcon = Icons.Filled.Settings,
-        unselectedIcon = Icons.Outlined.Settings
-      ),
+//      BottomNavigationItem(
+//        title = "Ajustes",
+//        destination = SettingsScreen,
+//        selectedIcon = Icons.Filled.Settings,
+//        unselectedIcon = Icons.Outlined.Settings
+//      ),
     )
   }
   

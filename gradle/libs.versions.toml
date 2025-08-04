@@ -20,7 +20,6 @@ coilCompose = "2.4.0"
 accompanistPermissions = "0.32.0"
 lifecycleViewmodelCompose = "2.9.2"
 
-
 [libraries]
 
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
