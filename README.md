@@ -27,6 +27,7 @@ Esta aplicación móvil está diseñada para ayudar a emprendedores a gestionar 
 - 🛠️ **Kotlin** + **Jetpack Compose**
 - 🏗 **Arquitectura MVVM**
 - 🗃️ **Room**
+- 🧪 **Koin**
 - 🌙 **Material 3**
 
 ## 📦 Instalación
@@ -34,4 +35,4 @@ Esta aplicación móvil está diseñada para ayudar a emprendedores a gestionar 
 1. Clona el repositorio
 
 ```bash
-git clone https://github.com/tu-usuario/tu-repo.git
+git clone https://github.com/SantiagoGrinblat/Asistente_de_emprendedor.git
