@@ -43,6 +43,11 @@ fun ButtonAddCard(
           onNavigateBack = {
             dialogOpen = false
             onNavigateBack()
+          },
+          onSaveCard = { card ->
+            viewModel.insertCard(card)
+            dialogOpen = false
+            onNavigateBack()
           }
         )
       }

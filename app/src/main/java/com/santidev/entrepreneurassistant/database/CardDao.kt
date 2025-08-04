@@ -23,4 +23,7 @@ interface CardDao {
   
   @Query("SELECT * FROM cards WHERE id = :id")
   suspend fun getCardById(id: Long): CardEntity?
+  
+  @Query( "UPDATE cards SET price = :newPrice WHERE id = :cardId")
+  suspend fun updatePrice(cardId: Long, newPrice: Int)
 }

@@ -31,9 +31,10 @@ class CardViewModel(private val repository: CardRepository): ViewModel() {
     }
   }
   
-  fun updateCard(card: CardEntity) {
+  fun updateCard(card: CardEntity, newPrice: Int) {
     launchIO {
-      repository.updateCard(card)
+      val updatedCard = card.copy(price = newPrice)
+      repository.updateCard(updatedCard)
     }
   }
 }

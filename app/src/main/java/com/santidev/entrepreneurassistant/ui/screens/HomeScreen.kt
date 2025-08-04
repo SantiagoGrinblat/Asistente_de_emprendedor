@@ -80,7 +80,11 @@ fun HomeScreen(navController: NavHostController) {
         ) {
           AddCard(
             viewModel = viewModel,
-            onNavigateBack = { showAddCard = false }
+            onNavigateBack = { showAddCard = false },
+            onSaveCard = { card ->
+              viewModel.insertCard(card)
+              showAddCard = false
+            }
           )
         }
       }

@@ -48,7 +48,8 @@ import kotlinx.coroutines.launch
 @Composable
 fun CardItem(
   card: CardEntity,
-  onDeleteClick: () -> Unit
+  onPriceUpdate: (CardEntity, Int) -> Unit,
+  onDeleteClick: () -> Unit,
 ) {
   Card(
     modifier = Modifier
@@ -59,7 +60,9 @@ fun CardItem(
       containerColor = MaterialTheme.colorScheme.surface
     )
   ) {
-    Column(modifier = Modifier.padding(8.dp)) {
+    Column(
+      modifier = Modifier.padding(8.dp)
+    ) {
       
       AsyncImage(
         model = Uri.parse(card.imageUri),
@@ -87,15 +90,19 @@ fun CardItem(
         color = MaterialTheme.colorScheme.onSurfaceVariant
       )
       
+      Spacer(modifier = Modifier.height(6.dp))
+      
       Row(
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
-      ) {
-        Text(
-          text = "Precio: ${card.price}",
-          style = MaterialTheme.typography.bodyLarge,
-          fontWeight = FontWeight.Medium
+      )
+      {
+        PriceEditor(
+          price = card.price,
+          onPriceChange = { newPrice ->
+            onPriceUpdate(card, newPrice)
+          }
         )
         
         IconButton(onClick = onDeleteClick) {

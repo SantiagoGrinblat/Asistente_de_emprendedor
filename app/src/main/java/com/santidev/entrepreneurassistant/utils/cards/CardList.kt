@@ -29,7 +29,10 @@ fun CardList(
     items(cards) { card ->
       CardItem(
         card = card,
-        onDeleteClick = { viewModel.deleteCard(card) }
+        onDeleteClick = { viewModel.deleteCard(card) },
+        onPriceUpdate = { cardToUpdate, newPrice ->
+          viewModel.updateCard(cardToUpdate, newPrice)
+        }
       )
     }
   }

@@ -55,10 +55,13 @@ import org.koin.androidx.compose.koinViewModel
 fun AddCard(
   viewModel: CardViewModel = koinViewModel(),
   onNavigateBack: () -> Unit,
+  onSaveCard: (CardEntity) -> Unit,
+  cardToEdit: CardEntity? = null
+  
 ) {
   var title by remember { mutableStateOf("") }
   var description by remember { mutableStateOf("") }
-  var price by remember { mutableStateOf("") }
+  var price by remember { mutableStateOf(cardToEdit?.price?.toString() ?: "") }
   var selectedImageUri by remember { mutableStateOf<Uri?>(null) }
   var showRationaleDialog by remember { mutableStateOf(false) }
   
@@ -239,14 +242,14 @@ fun AddCard(
     OutlinedTextField(
       value = title,
       onValueChange = { title = it },
-      label = { Text("Título") },
+      label = { Text("Título del producto") },
       modifier = Modifier.fillMaxWidth()
     )
     
     OutlinedTextField(
       value = description,
       onValueChange = { description = it },
-      label = { Text("Descripción") },
+      label = { Text("Descripción del producto") },
       modifier = Modifier.fillMaxWidth(),
       maxLines = 3
     )
@@ -254,7 +257,7 @@ fun AddCard(
     OutlinedTextField(
       value = price,
       onValueChange = { price = it },
-      label = { Text("Precio") },
+      label = { Text("Cantidad del producto") },
       modifier = Modifier.fillMaxWidth(),
       keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
     )
