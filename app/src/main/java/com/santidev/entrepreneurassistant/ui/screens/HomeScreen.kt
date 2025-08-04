@@ -42,7 +42,7 @@ fun HomeScreen(navController: NavHostController) {
     horizontalAlignment = Alignment.CenterHorizontally
   ) {
     Text(
-      text = "Mi almacen de productos",
+      text = "Mi almacén de productos",
       fontSize = 24.sp,
       fontWeight = FontWeight.Bold,
       modifier = Modifier

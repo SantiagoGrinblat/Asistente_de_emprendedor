@@ -52,14 +52,14 @@ fun CalculatePriceSale() {
   ) {
     Column(modifier = Modifier.padding(16.dp)) {
       Text(
-        text = "Calculadora de Precios con Margen sobre el precio de venta",
+        text = "Calculadora de Precios con Margen sobre el Precio de Venta",
         fontSize = 21.sp,
         fontWeight = FontWeight.Bold,
         textAlign = TextAlign.Center,
         modifier = Modifier.padding(bottom = 8.dp)
       )
       Text(
-        text = "*Ideal para comercios minoristas que calculan la ganancia como porcentaje del precio final*",
+        text = "* Ideal para comercios minoristas que calculan su ganancia como un porcentaje del precio final.*",
         fontSize = 16.sp,
         fontWeight = FontWeight.Light,
         textAlign = TextAlign.Center,

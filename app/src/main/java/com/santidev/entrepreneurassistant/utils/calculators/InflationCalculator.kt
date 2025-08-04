@@ -93,7 +93,7 @@ fun InflationCalculator() {
         OutlinedTextField(
           value = months,
           onValueChange = { months = it },
-          label = { Text("Cantidad de meses con esa inflación") },
+          label = { Text("Meses con esa tasa de inflación") },
           keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
           modifier = Modifier.fillMaxWidth()
         )

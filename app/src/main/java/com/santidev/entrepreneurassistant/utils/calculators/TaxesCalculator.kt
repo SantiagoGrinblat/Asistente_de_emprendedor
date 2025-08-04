@@ -171,7 +171,7 @@ fun TaxesCalculator() {
             isError = impuestoPersonalizado.isNotEmpty() && impuestoPersonalizado.toDoubleOrNull() == null,
             supportingText = {
               if (impuestoPersonalizado.isNotEmpty() && impuestoPersonalizado.toDoubleOrNull() == null) {
-                Text("Ingresa un número válido", color = MaterialTheme.colorScheme.error)
+                Text("Ingrese un número válido", color = MaterialTheme.colorScheme.error)
               }
             }
           )

@@ -52,14 +52,14 @@ fun CalculateCost() {
   ) {
     Column(modifier = Modifier.padding(16.dp)) {
       Text(
-        text = "Calculadora de Precios con Margen sobre el costo",
+        text = "Calculadora de Precios con Margen sobre el Costo",
         fontSize = 21.sp,
         fontWeight = FontWeight.Bold,
         textAlign = TextAlign.Center,
         modifier = Modifier.padding(bottom = 8.dp)
       )
       Text(
-        text = "*Ideal para emprendedores, mayoristas, fabricantes, etc*",
+        text = "* Ideal para emprendedores, mayoristas, fabricantes, etc.*",
         fontSize = 16.sp,
         fontWeight = FontWeight.Light,
         textAlign = TextAlign.Center,

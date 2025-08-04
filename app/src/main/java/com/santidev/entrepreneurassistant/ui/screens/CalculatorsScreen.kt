@@ -28,7 +28,7 @@ import com.santidev.entrepreneurassistant.utils.calculators.TaxesCalculator
 fun CalculatorsScreen(navController: NavHostController) {
   var tabSelecction by remember { mutableStateOf(0) }
   
-  val tabs = listOf("Margenes", "Inflacion", "Impuestos")
+  val tabs = listOf("Márgenes", "Inflación", "Impuestos")
   
   Column(
     modifier = Modifier
@@ -36,7 +36,7 @@ fun CalculatorsScreen(navController: NavHostController) {
       .padding(16.dp)
   ) {
     Text(
-      text = "Calculadoras para Emprendedores",
+      text = "Calculadoras para emprendedores",
       fontSize = 24.sp,
       fontWeight = FontWeight.Bold,
       modifier = Modifier
