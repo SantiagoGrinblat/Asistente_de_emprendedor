@@ -20,6 +20,8 @@ Esta aplicación móvil está diseñada para ayudar a emprendedores a gestionar 
 <p float="left">
   <img src="https://github.com/SantiagoGrinblat/Asistente_de_emprendedor/blob/fbf37c22f06c0a500a53759d588ac2e61d4af19f/captura-1.jpg" width="200" />
   <img src="https://github.com/SantiagoGrinblat/Asistente_de_emprendedor/blob/fbf37c22f06c0a500a53759d588ac2e61d4af19f/captura-2.jpg" width="200" />
+  <img src="https://github.com/SantiagoGrinblat/Asistente_de_emprendedor/blob/4dc270c615d75f559963c9defd9fba925856bf82/captura-3.jpg" width="200" />
+  <img src="https://github.com/SantiagoGrinblat/Asistente_de_emprendedor/blob/4dc270c615d75f559963c9defd9fba925856bf82/captura-4.jpg" width="200" />
 </p>
 
 ## 🧰 Tecnologías usadas
