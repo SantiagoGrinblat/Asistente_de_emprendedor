@@ -185,7 +185,7 @@ fun TaxesCalculator() {
           shape = RoundedCornerShape(10),
           elevation = ButtonDefaults.elevatedButtonElevation(defaultElevation = 8.dp)
         ) {
-          Text("Calcular")
+          Text("Calcular", color = Color.White, fontSize = 18.sp)
         }
         
         if (montoConImpuesto > 0) {

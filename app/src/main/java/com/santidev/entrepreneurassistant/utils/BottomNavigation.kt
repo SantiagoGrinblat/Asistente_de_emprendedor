@@ -67,12 +67,6 @@ fun BottomNavigation(navController: NavHostController) {
         selectedIcon = Icons.Filled.Calculate,
         unselectedIcon = Icons.Outlined.Calculate
       ),
-//      BottomNavigationItem(
-//        title = "Ajustes",
-//        destination = SettingsScreen,
-//        selectedIcon = Icons.Filled.Settings,
-//        unselectedIcon = Icons.Outlined.Settings
-//      ),
     )
   }
   
