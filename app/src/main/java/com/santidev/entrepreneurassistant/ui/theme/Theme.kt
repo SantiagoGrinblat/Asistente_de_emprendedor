@@ -1,18 +1,17 @@
 package com.santidev.entrepreneurassistant.ui.theme
 
-import android.app.Activity
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.material3.ColorScheme
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.platform.LocalContext
 
 private val DarkColorScheme = darkColorScheme(
@@ -20,16 +19,27 @@ private val DarkColorScheme = darkColorScheme(
   onPrimary = Color.White,
   
   // Colores de fondo
-  background = DeepGreenBackground,
+  background = Color.Transparent,
   onBackground = WhiteText,
   
   // Colores de superficie
-  surface = DeepGreenBackground,
+  surface = Color.Transparent,
   onSurface = WhiteText,
   
   // Colores secundarios
   secondary = LightGreen,
   onSecondary = WhiteText,
+  
+  // Agregar más colores de texto para consistencia
+  onTertiary = WhiteText,
+  onPrimaryContainer = WhiteText,
+  onSecondaryContainer = WhiteText,
+  onTertiaryContainer = WhiteText,
+  onError = WhiteText,
+  onErrorContainer = WhiteText,
+  onSurfaceVariant = WhiteText,
+  outline = WhiteText.copy(alpha = 0.6f),
+  outlineVariant = WhiteText.copy(alpha = 0.4f),
 )
 
 private val LightColorScheme = lightColorScheme(
@@ -37,16 +47,27 @@ private val LightColorScheme = lightColorScheme(
   onPrimary = WhiteText,
   
   // Colores de fondo
-  background = WhiteBackground,
-  onBackground = Color.Black,
+  background = Color.Transparent,
+  onBackground = WhiteText,
   
   // Colores de superficie
-  surface = WhiteBackground,
-  onSurface = Color.Black,
+  surface = Color.Transparent,
+  onSurface = WhiteText,
   
   // Colores secundarios
   secondary = LightGreen,
   onSecondary = WhiteText,
+  
+  // Agregar más colores de texto para consistencia
+  onTertiary = WhiteText,
+  onPrimaryContainer = WhiteText,
+  onSecondaryContainer = WhiteText,
+  onTertiaryContainer = WhiteText,
+  onError = WhiteText,
+  onErrorContainer = WhiteText,
+  onSurfaceVariant = WhiteText,
+  outline = WhiteText.copy(alpha = 0.6f),
+  outlineVariant = WhiteText.copy(alpha = 0.4f),
 )
 
 @Composable
@@ -60,13 +81,19 @@ fun EntrepreneurAssistantTheme(
       val context = LocalContext.current
       if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
     }
+    
     darkTheme -> DarkColorScheme
     else -> LightColorScheme
   }
   
-  MaterialTheme(
-    colorScheme = colorScheme,
-    typography = Typography,
-    content = content
-  )
+  // Aplicar el fondo personalizado aquí
+  Box(modifier = Modifier.fillMaxSize()) {
+    BackgroundColor()
+    
+    MaterialTheme(
+      colorScheme = colorScheme,
+      typography = Typography,
+      content = content
+    )
+  }
 }

@@ -77,7 +77,7 @@ fun BottomNavigation(navController: NavHostController) {
   NavigationBar(
     modifier = Modifier
       .fillMaxWidth(),
-    containerColor = MaterialTheme.colorScheme.surface,
+    containerColor = Color(0xFF0B1D13),
     contentColor = MaterialTheme.colorScheme.onSurface,
     tonalElevation = 8.dp
   ) {
