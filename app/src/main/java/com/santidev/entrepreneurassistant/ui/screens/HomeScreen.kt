@@ -47,7 +47,7 @@ fun HomeScreen(navController: NavHostController) {
       fontWeight = FontWeight.Bold,
       modifier = Modifier
         .fillMaxWidth()
-        .padding(bottom = 16.dp),
+        .padding(vertical = 28.dp),
       textAlign = TextAlign.Center,
     )
     

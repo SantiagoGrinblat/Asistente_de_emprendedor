@@ -4,6 +4,7 @@ import android.net.Uri
 import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -57,11 +58,13 @@ fun CardItem(
       .padding(4.dp),
     elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
     colors = CardDefaults.cardColors(
-      containerColor = MaterialTheme.colorScheme.surface
+      Color((0xFF0B1D13))
     )
   ) {
     Column(
-      modifier = Modifier.padding(8.dp)
+      modifier = Modifier
+        .padding(8.dp)
+        .clip(RoundedCornerShape(8.dp))
     ) {
       
       AsyncImage(
@@ -76,24 +79,28 @@ fun CardItem(
       
       Spacer(modifier = Modifier.height(8.dp))
       
-      Text(
-        text = card.title,
-        style = MaterialTheme.typography.headlineSmall,
-        fontWeight = FontWeight.Bold
-      )
-      
-      Spacer(modifier = Modifier.height(4.dp))
-      
-      Text(
-        text = card.description,
-        style = MaterialTheme.typography.bodyMedium,
-        color = MaterialTheme.colorScheme.onSurfaceVariant
-      )
+      Column(Modifier.padding(12.dp)) {
+        Text(
+          text = card.title,
+          style = MaterialTheme.typography.headlineSmall,
+          fontWeight = FontWeight.Bold
+        )
+        
+        Spacer(modifier = Modifier.height(4.dp))
+        
+        Text(
+          text = card.description,
+          style = MaterialTheme.typography.bodyMedium,
+          color = MaterialTheme.colorScheme.onSurfaceVariant
+        )
+      }
       
       Spacer(modifier = Modifier.height(6.dp))
       
       Row(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier
+          .fillMaxWidth()
+          .padding(horizontal = 12.dp),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
       )

@@ -167,14 +167,7 @@ fun AddCard(
   Column(
     modifier = Modifier
       .fillMaxWidth()
-      .background(
-        brush = Brush.linearGradient(
-          colors = listOf(
-            Color(0xFF0B1D13), // Verde muy oscuro arriba
-            Color(0xFF000000), // Negro abajo
-          )
-        )
-      )
+      .background(Color(0xFF0B1D13))
       .padding(8.dp),
     verticalArrangement = Arrangement.spacedBy(8.dp)
   ) {
