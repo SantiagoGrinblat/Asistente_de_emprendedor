@@ -1,25 +1,11 @@
 package com.santidev.entrepreneurassistant.utils
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AdUnits
-import androidx.compose.material.icons.filled.AllInbox
-import androidx.compose.material.icons.filled.BorderOuter
 import androidx.compose.material.icons.filled.Calculate
-import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Layers
-import androidx.compose.material.icons.filled.Settings
-import androidx.compose.material.icons.filled.ShoppingCart
-import androidx.compose.material.icons.outlined.AdUnits
-import androidx.compose.material.icons.outlined.AllInbox
-import androidx.compose.material.icons.outlined.BorderOuter
 import androidx.compose.material.icons.outlined.Calculate
-import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.Layers
-import androidx.compose.material.icons.outlined.Settings
-import androidx.compose.material.icons.outlined.ShoppingCart
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
@@ -32,16 +18,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
-import com.santidev.entrepreneurassistant.R
 import com.santidev.entrepreneurassistant.navigation.CalculatorScreen
 import com.santidev.entrepreneurassistant.navigation.HomeScreen
-//import com.santidev.entrepreneurassistant.navigation.SettingsScreen
 
 data class BottomNavigationItem(
   val title: String,

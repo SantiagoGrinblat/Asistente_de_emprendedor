@@ -1,4 +1,4 @@
-package com.santidev.entrepreneurassistant.utils.cards
+package com.santidev.entrepreneurassistant.utils.cardsProducts
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxSize

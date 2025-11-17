@@ -15,6 +15,7 @@ val appModule = module {
     ).build()
   }
   
+  
   // DAO
   single { get<AppDatabase>().cardDao() }
   

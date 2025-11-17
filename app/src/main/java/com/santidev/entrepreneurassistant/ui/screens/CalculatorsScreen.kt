@@ -23,6 +23,7 @@ import androidx.navigation.NavHostController
 import com.santidev.entrepreneurassistant.utils.calculators.InflationCalculator
 import com.santidev.entrepreneurassistant.utils.calculators.MarginCalculator
 import com.santidev.entrepreneurassistant.utils.calculators.TaxesCalculator
+import com.santidev.entrepreneurassistant.utils.composables.CalculatorHeader
 
 @Composable
 fun CalculatorsScreen(navController: NavHostController) {
@@ -35,15 +36,7 @@ fun CalculatorsScreen(navController: NavHostController) {
       .fillMaxSize()
       .padding(16.dp)
   ) {
-    Text(
-      text = "Calculadoras para emprendedores",
-      fontSize = 24.sp,
-      fontWeight = FontWeight.Bold,
-      modifier = Modifier
-        .fillMaxWidth()
-        .padding(vertical = 28.dp),
-      textAlign = TextAlign.Center,
-    )
+    CalculatorHeader()
     
     TabRow(selectedTabIndex = tabSelecction) {
       tabs.forEachIndexed { index, titulo ->

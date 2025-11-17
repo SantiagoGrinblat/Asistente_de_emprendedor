@@ -25,9 +25,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.santidev.entrepreneurassistant.CardViewModel
-import com.santidev.entrepreneurassistant.utils.cards.AddCard
-import com.santidev.entrepreneurassistant.utils.cards.ButtonAddCard
-import com.santidev.entrepreneurassistant.utils.cards.CardList
+import com.santidev.entrepreneurassistant.utils.cardsProducts.AddCard
+import com.santidev.entrepreneurassistant.utils.cardsProducts.ButtonAddCard
+import com.santidev.entrepreneurassistant.utils.cardsProducts.CardList
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
