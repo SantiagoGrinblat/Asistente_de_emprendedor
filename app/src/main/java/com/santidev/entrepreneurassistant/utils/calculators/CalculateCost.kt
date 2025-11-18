@@ -7,14 +7,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import com.santidev.entrepreneurassistant.utils.composables.Reusable.CalculatorCards
+import com.santidev.entrepreneurassistant.utils.composables.calculatesFunctions.CalculatorState
 import com.santidev.entrepreneurassistant.utils.composables.calculatesFunctions.calcularMargenSobreCosto
-
-data class CalculatorState(
-  val input1: String = "",
-  val input2: String = "",
-  val result1: Double = 0.0,
-  val result2: Double = 0.0
-)
 
 @Composable
 fun CalculateCost() {
@@ -50,4 +44,5 @@ fun CalculateCost() {
     result2Label = "Ganancia",
     result2Value = state.result2
   )
+  
 }
