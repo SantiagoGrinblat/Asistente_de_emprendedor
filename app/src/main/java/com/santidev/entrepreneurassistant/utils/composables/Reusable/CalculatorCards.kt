@@ -1,4 +1,4 @@
-package com.santidev.entrepreneurassistant.utils.composables
+package com.santidev.entrepreneurassistant.utils.composables.Reusable
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -15,9 +15,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
 @Composable
-private fun CalculatorCards(
+fun CalculatorCards(
   title: String,
   subTitle: String,
   input1Value: String,
@@ -43,13 +44,21 @@ private fun CalculatorCards(
         text = title,
         fontWeight = FontWeight.Bold,
         modifier = Modifier.fillMaxWidth(),
-        textAlign = TextAlign.Center
+        textAlign = TextAlign.Center,
+        fontSize = 22.sp
       )
+      
+      Spacer(modifier = Modifier.height(4.dp))
+      
       Text(
         text = subTitle,
         modifier = Modifier.fillMaxWidth(),
-        textAlign = TextAlign.Center
+        textAlign = TextAlign.Center,
+        fontSize = 16.sp
       )
+      
+      Spacer(modifier = Modifier.height(4.dp))
+      
       OptimizedTextField(
         value = input1Value,
         onValueChange = onInput1Change,

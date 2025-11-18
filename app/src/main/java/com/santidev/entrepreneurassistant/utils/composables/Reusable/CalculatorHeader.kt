@@ -1,4 +1,4 @@
-package com.santidev.entrepreneurassistant.utils.composables
+package com.santidev.entrepreneurassistant.utils.composables.Reusable
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
