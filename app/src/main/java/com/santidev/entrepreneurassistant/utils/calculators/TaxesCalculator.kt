@@ -23,6 +23,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -32,8 +33,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.santidev.entrepreneurassistant.utils.composables.Reusable.CalculateButton
+import com.santidev.entrepreneurassistant.utils.composables.Reusable.OptimizedTextField
+import com.santidev.entrepreneurassistant.utils.composables.calculatesFunctions.calcularImpuestos
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -41,12 +46,11 @@ fun TaxesCalculator() {
   var montoBase by remember { mutableStateOf("") }
   var tipoImpuesto by remember { mutableStateOf("IVA 21%") }
   var expanded by remember { mutableStateOf(false) }
-  var montoConImpuesto by remember { mutableStateOf(0.0) }
-  var soloImpuesto by remember { mutableStateOf(0.0) }
+  var impuestoPersonalizado by remember { mutableStateOf("") }
+  var showResults by remember { mutableStateOf(false) }
   
   // Nuevo estado para el impuesto personalizado para recordar el valor que seleccione el usuario
-  var impuestoPersonalizado by remember { mutableStateOf("") }
-  var mostrarCampoPersonalizado by remember { mutableStateOf(false) }
+  val mostrarImpuestoPersonalizado = tipoImpuesto == "Personalizado"
   
   val tiposImpuesto = listOf(
     "IVA 21%" to 21.0,
@@ -56,29 +60,14 @@ fun TaxesCalculator() {
     "Personalizado" to 0.0 // Nueva opcion para el impuesto personalizado
   )
   
-  fun calcular() {
-    val base = montoBase.toDoubleOrNull() ?: 0.0
-    
-    val porcentaje = if (tipoImpuesto == "Personalizado") {
-      val porcentajePersonalizado = impuestoPersonalizado.toDoubleOrNull()
-      if (porcentajePersonalizado == null || porcentajePersonalizado < 0) {
-        // Si no es válido, resetear resultados y salir
-        montoConImpuesto = 0.0
-        soloImpuesto = 0.0
-        return
+  val results: Pair<Double, Double> by remember(montoBase, tipoImpuesto, impuestoPersonalizado) {
+    derivedStateOf {
+      val porcentaje = if (tipoImpuesto == "Personalizado") {
+        impuestoPersonalizado.toDoubleOrNull() ?: 0.0
+      } else {
+        tiposImpuesto.find { it.first == tipoImpuesto }?.second ?: 21.0
       }
-      porcentajePersonalizado
-    } else {
-      tiposImpuesto.find { it.first == tipoImpuesto }?.second ?: 21.0
-    }
-    
-    if (base > 0) {
-      soloImpuesto = base * porcentaje / 100
-      montoConImpuesto = base + soloImpuesto
-    } else {
-      // Si el monto base no es valido, resetear resultados a 0
-      montoConImpuesto = 0.0
-      soloImpuesto = 0.0
+      calcularImpuestos(montoBase.toDoubleOrNull() ?: 0.0, porcentaje)
     }
   }
   
@@ -86,27 +75,35 @@ fun TaxesCalculator() {
     modifier = Modifier
       .fillMaxWidth()
       .verticalScroll(rememberScrollState())
+      .padding(horizontal = 16.dp)
   ) {
     Card(
       modifier = Modifier.fillMaxWidth(),
       colors = CardDefaults.cardColors(containerColor = Color.Transparent)
     ) {
-      Column(
-        modifier = Modifier.padding(16.dp)
-      ) {
+      Column(modifier = Modifier.padding(16.dp)) {
         Text(
           text = "Calculadora de Impuestos",
           fontSize = 21.sp,
           fontWeight = FontWeight.SemiBold,
-          modifier = Modifier.padding(bottom = 16.dp).align(Alignment.CenterHorizontally)
+          modifier = Modifier
+            .padding(bottom = 16.dp)
+            .align(Alignment.CenterHorizontally)
         )
         
-        OutlinedTextField(
+        Text(
+          text = "* Calcula el impuesto agregado sobre un monto base *",
+          modifier = Modifier.fillMaxWidth(),
+          textAlign = TextAlign.Center,
+          fontSize = 16.sp
+        )
+        
+        Spacer(modifier = Modifier.height(4.dp))
+        
+        OptimizedTextField(
           value = montoBase,
           onValueChange = { montoBase = it },
-          label = { Text("Monto base ($)") },
-          keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-          modifier = Modifier.fillMaxWidth()
+          label = "Monto base ($)"
         )
         
         Spacer(modifier = Modifier.height(8.dp))
@@ -131,35 +128,32 @@ fun TaxesCalculator() {
           ) {
             tiposImpuesto.forEach { (nombre, _) ->
               DropdownMenuItem(
-                text = { Text(
-                  nombre,
-                  fontWeight = FontWeight.Bold,
-                  color = MaterialTheme.colorScheme.primary
-                ) },
+                text = {
+                  Text(
+                    nombre,
+                    fontWeight = FontWeight.Bold,
+                    color = MaterialTheme.colorScheme.primary
+                  )
+                },
                 onClick = {
                   tipoImpuesto = nombre
-                  mostrarCampoPersonalizado = (nombre == "Personalizado")
                   expanded = false
-                  
-                  // Borrar el campo personalizado si se selecciona otro tipo de porcentaje
                   if (nombre != "Personalizado") {
                     impuestoPersonalizado = ""
                   }
                 },
-                modifier = Modifier.background(MaterialTheme.colorScheme.surface),
+                modifier = Modifier.background(MaterialTheme.colorScheme.surface)
               )
             }
           }
         }
         
-        // seccion para impuesto personalizado
-        if (mostrarCampoPersonalizado) {
+        if (mostrarImpuestoPersonalizado) {
           Spacer(modifier = Modifier.height(8.dp))
           
           OutlinedTextField(
             value = impuestoPersonalizado,
             onValueChange = { newValue ->
-              // Validar que solo se ingresen numeros y puntos
               if (newValue.isEmpty() || newValue.matches(Regex("^\\d*\\.?\\d*$"))) {
                 impuestoPersonalizado = newValue
               }
@@ -179,26 +173,18 @@ fun TaxesCalculator() {
         
         Spacer(modifier = Modifier.height(16.dp))
         
-        Button(
-          onClick = { calcular() },
-          modifier = Modifier.fillMaxWidth().background(MaterialTheme.colorScheme.surface),
-          shape = RoundedCornerShape(10),
-          elevation = ButtonDefaults.elevatedButtonElevation(defaultElevation = 8.dp)
-        ) {
-          Text("Calcular", color = Color.White, fontSize = 18.sp)
-        }
+        CalculateButton(onClick = { showResults = true })
         
-        if (montoConImpuesto > 0) {
+        if (showResults && results.first > 0) {
           Spacer(modifier = Modifier.height(8.dp))
-          HorizontalDivider(modifier = Modifier.fillMaxWidth(), thickness = 1.dp, color = Color.Gray)
+          HorizontalDivider(thickness = 1.dp, color = Color.Gray)
           Spacer(modifier = Modifier.height(8.dp))
+          
           Card(
             colors = CardDefaults.cardColors(containerColor = Color.Transparent),
             modifier = Modifier.fillMaxWidth()
           ) {
-            Column(
-              modifier = Modifier.padding(16.dp)
-            ) {
+            Column(modifier = Modifier.padding(16.dp)) {
               Text(
                 text = "Resultados:",
                 fontSize = 20.sp,
@@ -206,7 +192,6 @@ fun TaxesCalculator() {
                 modifier = Modifier.padding(bottom = 8.dp)
               )
               
-              // Mostrar el porcentaje usado en los resultados
               val porcentajeUsado = if (tipoImpuesto == "Personalizado") {
                 impuestoPersonalizado.toDoubleOrNull() ?: 0.0
               } else {
@@ -219,8 +204,8 @@ fun TaxesCalculator() {
                 color = MaterialTheme.colorScheme.primary,
                 modifier = Modifier.padding(bottom = 4.dp)
               )
-              Text("Total con impuesto: ${formatearPeso(montoConImpuesto)}", fontWeight = FontWeight.Bold)
-              Text("Solo impuesto: ${formatearPeso(soloImpuesto)}", fontWeight = FontWeight.Bold)
+              Text("Total con impuesto: ${formatearPeso(results.first)}", fontWeight = FontWeight.Bold)
+              Text("Solo impuesto: ${formatearPeso(results.second)}", fontWeight = FontWeight.Bold)
             }
           }
         }
