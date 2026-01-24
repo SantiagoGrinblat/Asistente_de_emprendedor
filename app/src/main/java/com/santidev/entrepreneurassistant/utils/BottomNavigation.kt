@@ -2,8 +2,10 @@ package com.santidev.entrepreneurassistant.utils
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccountBalance
 import androidx.compose.material.icons.filled.Calculate
 import androidx.compose.material.icons.filled.Layers
+import androidx.compose.material.icons.outlined.AccountBalance
 import androidx.compose.material.icons.outlined.Calculate
 import androidx.compose.material.icons.outlined.Layers
 import androidx.compose.material3.Icon
@@ -24,6 +26,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.santidev.entrepreneurassistant.navigation.CalculatorScreen
 import com.santidev.entrepreneurassistant.navigation.HomeScreen
+import com.santidev.entrepreneurassistant.navigation.ManagementScreen
 
 data class BottomNavigationItem(
   val title: String,
@@ -49,6 +52,12 @@ fun BottomNavigation(navController: NavHostController) {
         selectedIcon = Icons.Filled.Calculate,
         unselectedIcon = Icons.Outlined.Calculate
       ),
+      BottomNavigationItem(
+        title = "Gestion",
+        destination = ManagementScreen,
+        selectedIcon = Icons.Filled.AccountBalance,
+        unselectedIcon = Icons.Outlined.AccountBalance,
+      )
     )
   }
   

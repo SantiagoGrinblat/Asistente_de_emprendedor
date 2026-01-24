@@ -7,3 +7,6 @@ object HomeScreen
 
 @Serializable
 object CalculatorScreen
+
+@Serializable
+object ManagementScreen

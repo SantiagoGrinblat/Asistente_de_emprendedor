@@ -9,6 +9,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.santidev.entrepreneurassistant.ui.screens.CalculatorsScreen
 import com.santidev.entrepreneurassistant.ui.screens.HomeScreen
+import com.santidev.entrepreneurassistant.ui.screens.ManagementScreen
 
 @Composable
 fun NavigationComponent(
@@ -25,6 +26,9 @@ fun NavigationComponent(
     }
     composable<CalculatorScreen> {
       CalculatorsScreen(navController = navController)
+    }
+    composable<ManagementScreen> {
+      ManagementScreen(navController = navController)
     }
   }
 }
