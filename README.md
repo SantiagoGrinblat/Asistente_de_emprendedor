@@ -1,4 +1,4 @@
-# 📱 Gestor de contraseñas
+# 📱 Asistente para emprendedores
 
 Esta aplicación móvil está diseñada para ayudar a emprendedores a gestionar de forma eficiente sus productos, controlar su inventario y calcular precios de forma profesional sin necesidad de usar Excel.
 
